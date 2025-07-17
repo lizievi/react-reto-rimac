@@ -14,6 +14,7 @@ const SquareCheck = () => {
           htmlFor=""
           className="txt-policy text-3 text-[var(--color-secondary-light)]"
         >
+          <span>Acepto la </span>
           <a
             href="#"
             className="policy-link text-[var(--color-secondary)]  underline"

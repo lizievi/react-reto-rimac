@@ -3,7 +3,7 @@ import iconLlamar from "../assets/llamar.png";
 
 const Header = () => {
   return (
-    <header className="fixed w-full h-[56px] content-center bg-[var(--color-background)] lg:bg-transparent">
+    <header className="fixed w-full h-[56px] content-center bg-[var(--color-background)] lg:bg-transparent z-1">
       <div className="w-[82%] mx-auto flex justify-between items-center">
         <img
           src={logoRimac}

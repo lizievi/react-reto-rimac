@@ -5,8 +5,8 @@ import SelectDoc from "./select.jsx";
 
 const FormDom = () => {
   return (
-    <form className="form-price pt-10 lg:w-[60%]" id="form-price">
-      <div className="form__container w-[82%] lg:w-[50%] mx-auto flex flex-col gap-6">
+    <form className="form-price pt-10 lg:pt-20 lg:w-[60%]  pb-8" id="form-price">
+      <div className="form__container w-[82%] sm:w-[70%] md:w-[60%] lg:w-[50%] xl:w-[40%] mx-auto flex flex-col gap-6">
         <h2 className="form-price__h2 text-[24px] text-[var(--color-secondary-dark)] tracking-[-0.2px]">
           Déjanos tus datos
         </h2>
@@ -37,7 +37,7 @@ const FormDom = () => {
             className='w-full'
           />
           <SquareCheck />
-          <ButtonPrimary value="COTÍZALO" />
+          <ButtonPrimary value="COTÍZALO" className='lg:w-[65%]'/>
         </div>
       </div>
     </form>

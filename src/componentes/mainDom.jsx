@@ -8,9 +8,9 @@ import figuraDesktop from "../assets/figura-desktop.svg";
 
 const MainDom = () => {
   return (
-    <main className="main pt-10 lg:flex">
-      <div className={`main__welcome bg-[var(--color-background)] lg:bg-transparent  lg:bg-no-repeat lg:bg-cover lg:bg-center lg:w-[40%] lg:h-[90vh] lg:ml-[10%]`}>
-        <div className="welcome__container w-[82%] mx-auto flex h-[308px] lg:flex-col lg:w-[60%] lg:ml-[28px] lg:pt-[50px]">
+    <main className="main lg:flex">
+      <div className={`main__welcome bg-[var(--color-background)] lg:bg-transparent  lg:bg-no-repeat lg:bg-cover lg:bg-center lg:w-[40%] lg:h-[100vh] pt-10`}>
+        <div className="welcome__container w-[82%] mx-auto flex h-[308px] lg:h-[80vh] lg:flex-col lg:w-[60%] lg:pt-[50px] lg:mr-[15%]">
           <Image
             src={figuraDesktop}
             alt="Figura de una chica con su aplicativo de Rimac en el celular"

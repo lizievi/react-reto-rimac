@@ -21,10 +21,19 @@ body{
     font-family: var(--font-secondary) !important; 
 }
 
+select.element-form{
+  /* color: #494f66; */
+  appearance: none;
+  background-image: url(../assets/desglose-rojo.png);
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 16px;
+  width: 40%;
+}
+
 /* CORREGIR */
-/* @media (width >= 1024px){
+@media (width >= 1024px){
     .main__welcome{
         background-image: url(../assets/fondo-desktop.svg);
     }
-
-} */
+}
