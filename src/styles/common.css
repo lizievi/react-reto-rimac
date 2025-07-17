@@ -3,15 +3,28 @@
     --font-secondary: "Roboto", serif;
 }
 
+html{
+    font-size: 16px;
+}
+
 *{
     font-family: var(--font-primary);
-    font-weight: 400;
     box-sizing: border-box;
-    /* font-size: 16px; */
-    font-weight: 400;
 }
 
 body{
     margin: 0;
     padding: 0;
 }
+
+.roboto { 
+    font-family: var(--font-secondary) !important; 
+}
+
+/* CORREGIR */
+/* @media (width >= 1024px){
+    .main__welcome{
+        background-image: url(../assets/fondo-desktop.svg);
+    }
+
+} */

@@ -1,6 +1,4 @@
-const SpanTitle = ({content, className})=> {
-  return (
-    <span className={className}>{content}</span>
-  )
-}
-export default SpanTitle
+const SpanTitle = ({ content, className }) => {
+  return <span className={className}>{content}</span>;
+};
+export default SpanTitle;

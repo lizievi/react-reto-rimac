@@ -19,8 +19,3 @@
   color: #a9afd9;
   font-size: 16px;
 }
-
-.element-form:focus {
-  border: 1px solid var(--color-secondary-dark);
-  outline: none;
-}
