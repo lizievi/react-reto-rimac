@@ -3,3 +3,5 @@ const Image = ({ src, alt, className }) => {
 };
 
 export default Image;
+
+

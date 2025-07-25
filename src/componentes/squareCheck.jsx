@@ -1,17 +1,29 @@
-const SquareCheck = () => {
+const SquareCheck = ({
+  id, 
+  name, 
+  register, 
+  className,
+  error,
+  validationRules,
+  type,
+  ...rest
+
+}) => {
   return (
-    <div className="error-container">
+    <>
       <div
         className="policy-container mt-1 flex gap-[18px] border-none"
         id="policy-container"
       >
         <input
-          type="checkbox"
-          className="checkbox-small appearance-none w-5 h-5 cursor-pointer relative rounded-[4px] border-[1px] border-[var(--color-borde)] p-[10px]"
-          id="policy-content"
+          id={id}
+          type={type}
+          {...register(name, validationRules)}
+          {...rest}          
+          className={`checkbox-small appearance-none w-5 h-5 cursor-pointer relative rounded-[4px] border-[1px] border-[var(--color-borde)] p-[10px] ${className || ''}`}
         />
         <label
-          htmlFor=""
+          htmlFor={id}
           className="txt-policy text-3 text-[var(--color-secondary-light)]"
         >
           <span>Acepto la </span>
@@ -30,7 +42,10 @@ const SquareCheck = () => {
           </a>
         </label>
       </div>
-    </div>
+      {error && (
+        <p className="text-red-500 text-xs italic mt-1">{error.message}</p>
+      )}      
+    </>
   );
 };
 

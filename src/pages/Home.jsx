@@ -1,12 +1,13 @@
-import Image from "./image.jsx";
-import Paragraph from "./paragraph.jsx";
-import SpanTitle from "./spanTitle.jsx";
-import FormDom from "./formDom.jsx";
 
 import figuraMobil from "../assets/figura-mobile.png";
 import figuraDesktop from "../assets/figura-desktop.svg";
+import Image from "../componentes/image.jsx";
+import Paragraph from "../componentes/Paragraph.jsx";
+import SpanTitle from "../componentes/SpanTitle.jsx";
+// import FormDom from "../componentes/FormDom.jsx";
+import FormDomYup from "../componentes/FormDomYup.jsx";
 
-const MainDom = () => {
+const Home = () => {
   return (
     <main className="main lg:flex">
       <div className={`main__welcome bg-[var(--color-background)] lg:bg-transparent  lg:bg-no-repeat lg:bg-cover lg:bg-center lg:w-[40%] lg:h-[100vh] pt-10`}>
@@ -44,8 +45,8 @@ const MainDom = () => {
           />
         </div>
       </div>
-      <FormDom />
+      <FormDomYup />
     </main>
   );
 };
-export default MainDom;
+export default Home;
