@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-import ButtonPrimary from "./ButtonPrimario.jsx";
+import ButtonPrimary from "./ButtonPrimary.jsx";
 import SquareCheck from "./SquareCheck.jsx";
 import SelectDoc from "./Select.jsx";
 import InputForm from "./inputForm.jsx";
@@ -133,8 +133,7 @@ const FormDom = () => {
           />
           <ButtonPrimary
             value="COTÍZALO"
-            className="lg:w-[65%]"
-            type="submit"
+            className="lg:w-[65%]"            
           />
         </div>
       </div>

@@ -1,9 +1,9 @@
 import logoRimac from "../assets/logoRimac.svg";
 import iconLlamar from "../assets/llamar.png";
 
-const Header = () => {
+const Header = ({className}) => {
   return (
-    <header className="fixed w-full h-[56px] content-center bg-[var(--color-background)] lg:bg-transparent z-1">
+    <header className={`fixed w-full h-[56px] content-center bg-[var(--color-background)] lg:bg-transparent z-1 ${className || ''}`}>
       <div className="w-[82%] mx-auto flex justify-between items-center">
         <img
           src={logoRimac}
@@ -19,7 +19,7 @@ const Header = () => {
             Llámanos
           </p>
           <p className="hidden lg:block lg:text-[var(--color-tertiary-light)]">
-            (01)411 6001
+            (01) 411 6001
           </p>
         </div>
       </div>

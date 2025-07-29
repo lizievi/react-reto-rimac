@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import ButtonPrimary from "./ButtonPrimario.jsx";
+import ButtonPrimary from "./ButtonPrimary.jsx";
 import SquareCheck from "./SquareCheck.jsx";
 import SelectDoc from "./Select.jsx";
 import InputForm from "./inputForm.jsx";
@@ -50,7 +50,7 @@ const FormDom = () => {
       documentType: "dni",
       terms: false,
     },
-    mode: "onChange ",
+    mode: "onChange",
   });
 
   // const documentType = watch("documentType");
@@ -138,7 +138,6 @@ const FormDom = () => {
           <ButtonPrimary
             value="COTÍZALO"
             className="lg:w-[65%]"
-            type="submit"
           />
         </div>
       </div>
