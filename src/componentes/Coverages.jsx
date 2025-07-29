@@ -1,26 +1,25 @@
-import { MdOutlineKeyboardArrowUp } from "react-icons/md";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { CiCircleMinus } from "react-icons/ci";
-import { CiCirclePlus } from "react-icons/ci";
+import { MdOutlineKeyboardArrowUp, MdOutlineKeyboardArrowDown} from "react-icons/md";
+import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
-import IconLlanta from "../assets/icon_llanta.svg";
-import useToggleAdded from "../Hooks/useToggleAdded";
 import useToggleParagraph from "../Hooks/useToggleParagraph";
 
-const Coberturas = ({className}) => {
+const Coverages = ({id, className, isAdded, icon, title, description, alt='icon', onToggleAddRemove, mountUnit}) => {
 
-  const [isAdded, toggleAddRemove] = useToggleAdded(true)
-  const [isDown, toggleDown] = useToggleParagraph(true)
+  const [isDown, toggleDown] = useToggleParagraph(false)
+  const handleClickToggle = () => {
+    onToggleAddRemove(id, !isAdded)
+  }
 
   
   return (
     <div>
       <div className={`grid grid-cols-[1.5fr_7.5fr_1fr] pb-6 border-b border-[var(--color-borde)] mb-6 ${className || ''}`}>
-        <img src={IconLlanta} alt="Icono" />
+        <img src={icon} alt={alt} />
         <div className="flex flex-col gap-3 p-2">
-          <p className="text-[20px] text-[var(--color-secondary-dark)]">Llanta robada</p>
+          <p className="text-[20px] text-[var(--color-secondary-dark)]">{title}</p>
           <button 
-            onClick={toggleAddRemove}
+            onClick={handleClickToggle}
+            
             className="flex items-center gap-2 text-[var(--color-tertiary-light)]"> 
             
             {isAdded ? (
@@ -34,8 +33,10 @@ const Coberturas = ({className}) => {
             </span>
           </button>
           {isDown && (
-            <p className="text-[var(--color-secondary)] text-[14px] !font-[var(--font-secondary)]">He salido de casa a las cuatro menos cinco para ir a la academia de ingles de mi pueblo (Sant Cugat, al lado de Barcelona) con mi bici, na llego a la academia que esta en el centro del pueblo en una plaza medio-grande y dejo donde siempre la bici atada con una piton a un sitio de esos de poner las bicis y mucho mds</p>
+            <p className="text-[var(--color-secondary)] text-[14px] !font-[var(--font-secondary)]">{description}</p>
           )}
+
+          
           
         </div>
         <button
@@ -52,4 +53,4 @@ const Coberturas = ({className}) => {
   );
 };
 
-export { Coberturas };
+export { Coverages };

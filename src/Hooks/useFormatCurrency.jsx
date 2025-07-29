@@ -1,4 +1,4 @@
-const useFormatCurrency = (locale='es-PE', currency='PEN', options={}) => {
+const useFormatCurrency = (locale='en-UE', currency='USD', options={}) => {
 
   const defaultOptions = {
     style: 'currency',
