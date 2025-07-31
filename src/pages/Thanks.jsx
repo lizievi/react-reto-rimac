@@ -1,11 +1,17 @@
+import { useLocation } from 'react-router-dom'
 import ImgTyDesk from '../assets/thanks-desktop.png'
 import ImgTyMobile from '../assets/thanks-mobile.svg'
 import ButtonPrimary from '../componentes/ButtonPrimary'
 import Footer from '../componentes/Footer'
 import Header from '../componentes/Header'
 
-
 const Thanks = () => {
+
+  const location = useLocation();
+
+  const {montoMensual, montoAsegurado} = location.state;
+
+  console.log(`El monto mensual es: ${montoMensual} y El monto asegurado es: ${montoAsegurado}`)
   return (
     <div>
       <Header className='!bg-white border-b-2 border-[var(--color-secondary-extra-light)]'/>

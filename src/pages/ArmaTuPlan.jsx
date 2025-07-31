@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Bs1Circle } from "react-icons/bs";
 import { Bs2CircleFill } from "react-icons/bs";
@@ -15,7 +15,7 @@ import ButtonPrimary from "../componentes/ButtonPrimary";
 import Header from "../componentes/Header";
 import useMountEdit from "../Hooks/useMountEdit";
 import useFormatCurrency from "../Hooks/useFormatCurrency";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 
 const initialCoverages = [
   {
@@ -48,34 +48,48 @@ const initialCoverages = [
 ];
 
 const ArmaTuPlan = () => {
-  const { mount, MountIncrease, MountDecrease } = useMountEdit(12500, 16500);
-  const formatNumberZero = useFormatCurrency();
-  const formatNumberTwo = useFormatCurrency(
-    'en-US', 
-    'USD',
-    {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2, 
-    }
-  );
+  const formatNumberZeroDec = useFormatCurrency();
+  const formatNumberTwoDec = useFormatCurrency("en-US", "USD", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
   const [coverages, setCoverages] = useState(initialCoverages);
 
-  const handleToggleCoverage = (id, newIsAddedState) => {
-    setCoverages((prevCoverages) =>
-      prevCoverages.map((coverage) =>
-        coverage.id === id
-          ? { ...coverage, isAdded: newIsAddedState }
-          : coverage
-      )
-    );
-  };
+  const navigate = useNavigate();
+
+  const handleToggleCoverage = useCallback((id, newIsAddedState) => {
+      setCoverages((prevCoverages) =>
+        prevCoverages.map((coverage) =>
+          coverage.id === id
+            ? { ...coverage, isAdded: newIsAddedState }
+            : coverage
+        )
+      );
+    },
+    [setCoverages]
+  );
+
+  const { mount, MountIncrease, MountDecrease } = useMountEdit(
+    12500,
+    16500,
+    handleToggleCoverage
+  );
 
   const totalCoverageMount = useMemo(() => {
     return coverages.reduce((sum, coverage) => {
       return sum + (coverage.isAdded ? coverage.mountUnit : 0);
     }, 20);
   }, [coverages]);
+
+  const handleConfirmPlan = () => {
+    navigate('./Thanks' ,{
+      state:{
+        montoMensual: totalCoverageMount,
+        montoAsegurado: mount,
+      }
+    })
+  }
 
   return (
     <div>
@@ -161,7 +175,7 @@ const ArmaTuPlan = () => {
                 >
                   -
                 </button>
-                <span>{formatNumberZero(mount)}</span>
+                <span>{formatNumberZeroDec(mount)}</span>
                 <button
                   onClick={MountIncrease}
                   className="text-[var(--color-tertiary-light)] text-2xl w-8"
@@ -184,19 +198,29 @@ const ArmaTuPlan = () => {
               <h3 className="p-6">MEJORA TU PLAN</h3>
             </div>
           </div>
-          {coverages.map(coverage => (
-            <Coverages
-              className="w-[70%] mx-auto"
-              key={coverage.id}
-              id={coverage.id}
-              icon={coverage.icon}
-              title={coverage.title}
-              description={coverage.description}
-              mountUnit={coverage.mountUnit}
-              isAdded={coverage.isAdded}
-              onToggleAddRemove={handleToggleCoverage}
-            />
-          ))}
+
+          
+          {coverages.map(coverage => {
+            const shoulRender = !(coverage.id === 'crash' && mount > 16000);
+
+            if(!shoulRender){
+              return null
+            }
+
+            return (
+              <Coverages
+                className="w-[70%] mx-auto"
+                key={coverage.id}
+                id={coverage.id}
+                icon={coverage.icon}
+                title={coverage.title}
+                description={coverage.description}
+                mountUnit={coverage.mountUnit}
+                isAdded={coverage.isAdded}
+                onToggleAddRemoveBtn={handleToggleCoverage}
+              />
+            )
+          })}
         </section>
 
         <section className="lg:pt-48">
@@ -204,7 +228,7 @@ const ArmaTuPlan = () => {
             <div className="text-[var(--color-secondary-dark)] lg:pb-4 lg:border-b border-[var(--color-borde)] w-[70%] text-[12px]">
               <p className="hidden lg:block">MONTO</p>
               <p className="text-[24px] lg:text-[28px]">
-                {formatNumberTwo(totalCoverageMount)}
+                {formatNumberTwoDec(totalCoverageMount)}
               </p>
               <p className="text-[var(--color-secondary)] hidden lg:block">
                 mensuales
@@ -235,6 +259,7 @@ const ArmaTuPlan = () => {
             <ButtonPrimary
               value="LO QUIERO"
               className="w-[70%] py-0 lg:py-3 lowercase lg:uppercase"
+              onClick = {handleConfirmPlan}
             />
           </div>
         </section>

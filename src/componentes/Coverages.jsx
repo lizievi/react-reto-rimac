@@ -3,13 +3,9 @@ import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
 import useToggleParagraph from "../Hooks/useToggleParagraph";
 
-const Coverages = ({id, className, isAdded, icon, title, description, alt='icon', onToggleAddRemove, mountUnit}) => {
+export const Coverages = ({id, className, isAdded, icon, title, description, alt='icon', onToggleAddRemoveBtn, mountUnit}) => {
 
   const [isDown, toggleDown] = useToggleParagraph(false)
-  const handleClickToggle = () => {
-    onToggleAddRemove(id, !isAdded)
-  }
-
   
   return (
     <div>
@@ -18,8 +14,7 @@ const Coverages = ({id, className, isAdded, icon, title, description, alt='icon'
         <div className="flex flex-col gap-3 p-2">
           <p className="text-[20px] text-[var(--color-secondary-dark)]">{title}</p>
           <button 
-            onClick={handleClickToggle}
-            
+            onClick={() => onToggleAddRemoveBtn(id, !isAdded)}           
             className="flex items-center gap-2 text-[var(--color-tertiary-light)]"> 
             
             {isAdded ? (
@@ -34,9 +29,7 @@ const Coverages = ({id, className, isAdded, icon, title, description, alt='icon'
           </button>
           {isDown && (
             <p className="text-[var(--color-secondary)] text-[14px] !font-[var(--font-secondary)]">{description}</p>
-          )}
-
-          
+          )}   
           
         </div>
         <button
@@ -53,4 +46,4 @@ const Coverages = ({id, className, isAdded, icon, title, description, alt='icon'
   );
 };
 
-export { Coverages };
+
