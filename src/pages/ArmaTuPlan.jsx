@@ -1,21 +1,21 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Coverages } from "../componentes/Coverages";
+import ButtonPrimary from "../componentes/ButtonPrimary";
+import Header from "../componentes/Header";
+import useMountEdit from "../Hooks/useMountEdit";
+import useFormatCurrency from "../Hooks/useFormatCurrency";
+import { useMemo, useState, useCallback, useEffect } from "react";
 
-import { Bs1Circle } from "react-icons/bs";
-import { Bs2CircleFill } from "react-icons/bs";
+import { Bs1Circle, Bs2CircleFill } from "react-icons/bs";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
 
 import IconStolen from "../assets/icon_llanta.svg";
 import IconCrash from "../assets/icon_choque.svg";
 import IconHit from "../assets/icon_atropello.svg";
-
 import ImageMainDesktop from "../assets/plan-main-desktop.svg";
-import { Coverages } from "../componentes/Coverages";
-import ButtonPrimary from "../componentes/ButtonPrimary";
-import Header from "../componentes/Header";
-import useMountEdit from "../Hooks/useMountEdit";
-import useFormatCurrency from "../Hooks/useFormatCurrency";
-import { useMemo, useState, useCallback } from "react";
+
+
 
 const initialCoverages = [
   {
@@ -57,6 +57,36 @@ const ArmaTuPlan = () => {
   const [coverages, setCoverages] = useState(initialCoverages);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [userName, setUserName] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+
+  const {numeroDocumento, placa} = location.state || {}
+
+  useEffect(() => {    
+    if (numeroDocumento) {
+      const fetchUserData = async () => {
+        try {
+          const response = await fetch(`http://localhost:3001/api/users/${numeroDocumento}`);
+          const userData = await response.json();
+          
+          if (!response.ok) {
+            throw new Error('Usuario no encontrado');
+          }
+          
+          setUserName(userData.name);
+          setUserEmail(userData.email);
+
+        } catch (error) {
+          console.error("No se pudo obtener el nombre del usuario:", error);
+          setUserName(null);
+        }
+      };
+      
+      fetchUserData();
+    }
+  }, [numeroDocumento]);
 
   const handleToggleCoverage = useCallback((id, newIsAddedState) => {
       setCoverages((prevCoverages) =>
@@ -87,6 +117,7 @@ const ArmaTuPlan = () => {
       state:{
         montoMensual: totalCoverageMount,
         montoAsegurado: mount,
+        email: userEmail,
       }
     })
   }
@@ -129,7 +160,7 @@ const ArmaTuPlan = () => {
                 <span className="text-[var(--color-secondary-dark)]">
                   ¡Hola,{` `}
                 </span>
-                <span className="text-[var(--color-primary)]">{` `}Juan!</span>
+                <span className="text-[var(--color-primary)]">{` `}{userName ? `${userName}!` : 'estimad@!'}</span>
               </h1>
               <h1 className="lg:hidden text-[var(--color-secondary-dark)] text-[28px]">
                 Mira las coberturas
@@ -141,7 +172,7 @@ const ArmaTuPlan = () => {
                 <div className="flex items-center border-3 border-[var(--color-secondary-extra-light)] rounded-[12px] relative h-[172px] mt-[40px] w-full">
                   <div className="w-[44%] ml-[8%]">
                     <p className="text-[12px] text-[var(--color-secondary-light)] ">
-                      Placa: C2U-114
+                      Placa: {placa ? placa : 'No disponible'}
                     </p>
                     <p className="text-[20px] text-[var(--color-secondary-dark)]">
                       <span>Wolkswagen </span>

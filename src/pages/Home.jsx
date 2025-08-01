@@ -1,14 +1,28 @@
-
 import figuraMobil from "../assets/figura-mobile.png";
 import figuraDesktop from "../assets/figura-desktop.svg";
+
 import Image from "../componentes/image.jsx";
 import Paragraph from "../componentes/Paragraph.jsx";
 import SpanTitle from "../componentes/SpanTitle.jsx";
 // import FormDom from "../componentes/FormDom.jsx";
 import FormDomYup from "../componentes/FormDomYup.jsx";
 import Header from "../componentes/Header.jsx";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  // const navigate = useNavigate()
+  // const handleConfirmPrice = () => {
+  //   navigate('ArmaTuPlan' ,{
+  //     state:{
+  //       tipoDocumento: documentType,
+  //       numeroDocumento: documentNumber,
+  //       celular: phone,
+  //       placa: plate,
+  //       terminosYCondiciones: terms,
+  //     }
+  //   })
+  // }
+
   return (
     <div>
       <Header />

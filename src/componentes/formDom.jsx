@@ -23,7 +23,7 @@ const FormDom = () => {
   const onSubmit = (data) => {
     console.log("Formulario enviado con éxito", data);
     alert(
-      "¡Formulario eniciado con éxito! Revisa la consola para ver los datos"
+      "¡Formulario iniciado con éxito! Revisa la consola para ver los datos"
     );
   };
 

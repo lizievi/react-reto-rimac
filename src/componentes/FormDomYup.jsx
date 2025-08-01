@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useNavigate } from "react-router-dom";
 
 import ButtonPrimary from "./ButtonPrimary.jsx";
 import SquareCheck from "./SquareCheck.jsx";
@@ -39,6 +40,8 @@ const schema = yup.object().shape({
 })
 
 const FormDom = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -53,18 +56,23 @@ const FormDom = () => {
     mode: "onChange",
   });
 
-  // const documentType = watch("documentType");
 
-  const onSubmit = (data) => {
+
+  const onSubmit = async (data) => {
     console.log("Formulario enviado con éxito", data);
-    alert(
-      "¡Formulario eniciado con éxito! Revisa la consola para ver los datos"
-    );
-  };
+
+    navigate('/armatuplan',{
+      state:{
+        tipoDocumento: data.documentType,
+        numeroDocumento: data.documentNumber,
+        celular: data.phone,
+        placa: data.plate,
+      }
+    })
+  } 
 
   const onError = (errors) => {
     console.error("Errores de validación:", errors);
-    alert("Por favor, corrige los errores del formulario.");
   };
 
   const documentTypeOptions = [
@@ -124,8 +132,7 @@ const FormDom = () => {
               placeholder="Placa"
               className="w-full"
               register={register}
-              error={errors.plate}
-              
+              error={errors.plate}             
             />
           </div>
           <SquareCheck
