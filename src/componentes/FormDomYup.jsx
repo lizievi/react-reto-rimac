@@ -1,84 +1,19 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { useNavigate } from "react-router-dom";
-
 import ButtonPrimary from "./ButtonPrimary.jsx";
 import SquareCheck from "./SquareCheck.jsx";
 import SelectDoc from "./Select.jsx";
-import InputForm from "./inputForm.jsx";
-
-const schema = yup.object().shape({
-  documentType: yup
-    .string()
-    .oneOf(['dni','pasaporte']),
-
-  documentNumber: yup
-    .string()
-    .required("El número de documento es obligatorio")
-    .when('documentType', {
-      is:'dni',
-      then: (schema) => schema
-        .matches(/^\d{8}$/, 'El DNI debe tener exactamente 8 dígitos numéricos'),
-      otherwise: (schema) => schema
-        .matches(/^[A-Z0-9]{6,12}$/i, "El pasaporte debe tener entre 6 y 12 caracteres alfanuméricos")
-    }),
-
-  phone: yup
-    .string()
-    .required('El número de celular es requerido')
-    .matches(/^[9]{1}[0-9]{8}$/, "El número de celular debe empezar con 9 y tener 9 digitos"),
-
-  plate: yup
-    .string()
-    .required("La placa es requerida")
-    .matches(/^[a-zA-Z]{3}-[0-9]{3}$/, "La placa debe tener el formato AAA-123"),  
-
-  terms: yup
-    .boolean()
-    .oneOf([true], 'Debe aceptar los términos y condiciones')
-})
+import InputForm from "./InputForm.jsx";
+import { useFormLogic } from "../hooks/useFormLogic.js";
 
 const FormDom = () => {
-  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      documentType: "dni",
-      terms: false,
-    },
-    mode: "onChange",
-  });
-
-
-
-  const onSubmit = async (data) => {
-    console.log("Formulario enviado con éxito", data);
-
-    navigate('/armatuplan',{
-      state:{
-        tipoDocumento: data.documentType,
-        numeroDocumento: data.documentNumber,
-        celular: data.phone,
-        placa: data.plate,
-      }
-    })
-  } 
-
-  const onError = (errors) => {
-    console.error("Errores de validación:", errors);
-  };
-
-  const documentTypeOptions = [
-    { value: "dni", label: "DNI" },
-    { value: "pasaporte", label: "Pasaporte" },
-  ];
+    errors,
+    onSubmit,
+    onError,
+    documentTypeOptions,
+  } = useFormLogic();
 
   return (
     <form

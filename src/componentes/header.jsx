@@ -1,5 +1,5 @@
-import logoRimac from "../assets/logoRimac.svg";
-import iconLlamar from "../assets/llamar.png";
+import logoRimac from "../assets/img/img_logo_rimac.svg";
+import iconPhone from "../assets/icons/icon_phone.png";
 
 const Header = ({className}) => {
   return (
@@ -14,7 +14,7 @@ const Header = ({className}) => {
           <p className="hidden lg:block lg:mr-5 lg:text-[var(--color-secondary)] lg:text-[12px]">
             ¿Tienes alguna duda?
           </p>
-          <img src={iconLlamar} alt="ícono de telefono" className="w-6 h-6" />
+          <img src={iconPhone} alt="ícono de telefono" className="w-6 h-6" />
           <p className="lg:hidden text-[var(--color-tertiary-light)]">
             Llámanos
           </p>

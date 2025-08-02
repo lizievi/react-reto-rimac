@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import ButtonPrimary from "./ButtonPrimary.jsx";
 import SquareCheck from "./SquareCheck.jsx";
 import SelectDoc from "./Select.jsx";
-import InputForm from "./inputForm.jsx";
+import InputForm from "./InputForm.jsx";
 
 const FormDom = () => {
   const {

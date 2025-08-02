@@ -24,7 +24,7 @@ body {
 select.element-form {
   /* color: #494f66; */
   appearance: none;
-  background-image: url(../assets/desglose-rojo.png);
+  background-image: url(../assets/icons/icon_down_red.png);
   background-repeat: no-repeat;
   background-position: right 20px center;
   background-size: 16px;

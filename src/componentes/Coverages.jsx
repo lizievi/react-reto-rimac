@@ -1,9 +1,9 @@
 import { MdOutlineKeyboardArrowUp, MdOutlineKeyboardArrowDown} from "react-icons/md";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
-import useToggleParagraph from "../Hooks/useToggleParagraph";
+import useToggleParagraph from "../hooks/useToggleParagraph.js";
 
-export const Coverages = ({id, className, isAdded, icon, title, description, alt='icon', onToggleAddRemoveBtn, mountUnit}) => {
+export const Coverages = ({id, className, isAdded, icon, title, description, alt='icon', onToggleAddRemoveBtn}) => {
 
   const [isDown, toggleDown] = useToggleParagraph(false)
   

@@ -15,13 +15,13 @@ const useMountEdit = (min, max, onToggleCoverage) => {
     if (mount + 100 <= max) {
       setMount(mount + 100);
     }
-  }, [mount]);
+  }, [max, mount]);
 
   const MountDecrease = useCallback(() => {
     if (mount - 100 >= min) {
       setMount(mount - 100);
     }
-  }, [mount]);
+  }, [min, mount]);
 
   return {
     mount,

@@ -1,5 +1,3 @@
-import React from "react";
-
 const InputForm = ({
   id, 
   type = 'text', 

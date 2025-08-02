@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import ImgTyDesk from "../assets/thanks-desktop.png";
-import ImgTyMobile from "../assets/thanks-mobile.svg";
+import ImgTyDesk from "../assets/img/img_thanks_desktop.png";
+import ImgTyMobile from "../assets/img/img_thanks_mobile.svg";
 import ButtonPrimary from "../componentes/ButtonPrimary";
 import Footer from "../componentes/Footer";
 import Header from "../componentes/Header";
@@ -14,17 +14,14 @@ const Thanks = () => {
     `El monto mensual es: ${montoMensual}, El monto asegurado es: ${montoAsegurado} y el correo es: ${email}`
   );
 
-  if (!email) {
-    return (
-      <div>
-        <h1>Error: No se encontró la dirección de correo electrónico.</h1>
-      </div>
-    );
-  }
+  // if (!email) {
+  //   return (
+  //     <div>
+  //       <h1>Error: No se encontró la dirección de correo electrónico.</h1>
+  //     </div>
+  //   );
+  // }
 
-  console.log(
-    `El monto mensual es: ${montoMensual} y El monto asegurado es: ${montoAsegurado}`
-  );
 
   return (
     <div>

@@ -1,51 +1,17 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Coverages } from "../componentes/Coverages";
 import ButtonPrimary from "../componentes/ButtonPrimary";
 import Header from "../componentes/Header";
-import useMountEdit from "../Hooks/useMountEdit";
-import useFormatCurrency from "../Hooks/useFormatCurrency";
-import { useMemo, useState, useCallback, useEffect } from "react";
+import useFormatCurrency from "../hooks/useFormatCurrency.js";
+import  { usePlanLogic }  from "../hooks/usePlanLogic.js";
 
 import { Bs1Circle, Bs2CircleFill } from "react-icons/bs";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
 
-import IconStolen from "../assets/icon_llanta.svg";
-import IconCrash from "../assets/icon_choque.svg";
-import IconHit from "../assets/icon_atropello.svg";
-import ImageMainDesktop from "../assets/plan-main-desktop.svg";
+import ImageMainDesktop from "../assets/img/img_plan_desktop.svg";
 
 
-
-const initialCoverages = [
-  {
-    id: "stolenTire",
-    icon: IconStolen,
-    title: "Llanta robada",
-    description:
-      "He salido de casa a las cuatro menos cinco para ir a la academia de ingles de mi pueblo (Sant Cugat, al lado de Barcelona) con mi bici, na llego a la academia que esta en el centro del pueblo en una plaza medio-grande y dejo donde siempre la bici atada con una piton a un sitio de esos de poner las bicis y mucho mds",
-    mountUnit: 15,
-    isAdded: true,
-  },
-  {
-    id: "crash",
-    icon: IconCrash,
-    title: "Choque y/o pasarte la luz roja",
-    description:
-      "He salido de casa a las cuatro menos cinco para ir a la academia de ingles de mi pueblo (Sant Cugat, al lado de Barcelona) con mi bici, na llego a la academia que esta en el centro del pueblo en una plaza medio-grande y dejo donde siempre la bici atada con una piton a un sitio de esos de poner las bicis y mucho mds",
-    mountUnit: 20,
-    isAdded: false,
-  },
-  {
-    id: "hit",
-    icon: IconHit,
-    title: "Atropello en la vía Evitamiento",
-    description:
-      "He salido de casa a las cuatro menos cinco para ir a la academia de ingles de mi pueblo (Sant Cugat, al lado de Barcelona) con mi bici, na llego a la academia que esta en el centro del pueblo en una plaza medio-grande y dejo donde siempre la bici atada con una piton a un sitio de esos de poner las bicis y mucho mds",
-    mountUnit: 50,
-    isAdded: false,
-  },
-];
 
 const ArmaTuPlan = () => {
   const formatNumberZeroDec = useFormatCurrency();
@@ -54,73 +20,29 @@ const ArmaTuPlan = () => {
     maximumFractionDigits: 2,
   });
 
-  const [coverages, setCoverages] = useState(initialCoverages);
-
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const [userName, setUserName] = useState(null);
-  const [userEmail, setUserEmail] = useState(null);
-
-  const {numeroDocumento, placa} = location.state || {}
-
-  useEffect(() => {    
-    if (numeroDocumento) {
-      const fetchUserData = async () => {
-        try {
-          const response = await fetch(`http://localhost:3001/api/users/${numeroDocumento}`);
-          const userData = await response.json();
-          
-          if (!response.ok) {
-            throw new Error('Usuario no encontrado');
-          }
-          
-          setUserName(userData.name);
-          setUserEmail(userData.email);
-
-        } catch (error) {
-          console.error("No se pudo obtener el nombre del usuario:", error);
-          setUserName(null);
-        }
-      };
-      
-      fetchUserData();
-    }
-  }, [numeroDocumento]);
-
-  const handleToggleCoverage = useCallback((id, newIsAddedState) => {
-      setCoverages((prevCoverages) =>
-        prevCoverages.map((coverage) =>
-          coverage.id === id
-            ? { ...coverage, isAdded: newIsAddedState }
-            : coverage
-        )
-      );
-    },
-    [setCoverages]
-  );
-
-  const { mount, MountIncrease, MountDecrease } = useMountEdit(
-    12500,
-    16500,
-    handleToggleCoverage
-  );
-
-  const totalCoverageMount = useMemo(() => {
-    return coverages.reduce((sum, coverage) => {
-      return sum + (coverage.isAdded ? coverage.mountUnit : 0);
-    }, 20);
-  }, [coverages]);
+  const { 
+    coverages, 
+    totalCoverageMount, 
+    handleToggleCoverage, 
+    mount, 
+    MountIncrease, 
+    MountDecrease,
+    userName,
+    userEmail,
+    placa
+  } = usePlanLogic();
 
   const handleConfirmPlan = () => {
-    navigate('./Thanks' ,{
-      state:{
+    navigate("../thanks", {
+      state: {
         montoMensual: totalCoverageMount,
         montoAsegurado: mount,
         email: userEmail,
-      }
-    })
-  }
+      },
+    });
+  };
 
   return (
     <div>
