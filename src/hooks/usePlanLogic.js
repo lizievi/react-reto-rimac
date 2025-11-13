@@ -7,6 +7,9 @@ export const usePlanLogic = () => {
   const [coverages, setCoverages] = useState(initialCoverages);
   const [userName, setUserName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
+  const [userMarca, setUserMarca] = useState(null);
+  const [userAnio, setUserAnio] = useState(null);
+  const [userModelo, setUserModelo] = useState(null);
 
   const location = useLocation();
   const { numeroDocumento, placa } = location.state || {};
@@ -49,6 +52,9 @@ export const usePlanLogic = () => {
           
           setUserName(userData.name);
           setUserEmail(userData.email);
+          setUserMarca(userData.marca);
+          setUserAnio(userData.anio);
+          setUserModelo(userData.modelo);
 
         } catch (error) {
           console.error("No se pudo obtener el nombre del usuario:", error);
@@ -70,5 +76,8 @@ export const usePlanLogic = () => {
     userName,
     userEmail,
     placa,
+    userAnio,
+    userModelo,
+    userMarca,
   };
 };

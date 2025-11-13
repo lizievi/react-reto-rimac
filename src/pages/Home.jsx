@@ -7,6 +7,7 @@ import SpanTitle from "../componentes/SpanTitle.jsx";
 // import FormDom from "../componentes/FormDom.jsx";
 import FormDomYup from "../componentes/FormDomYup.jsx";
 import Header from "../componentes/Header.jsx";
+import Footer from "../componentes/Footer.jsx";
 
 const Home = () => {
 
@@ -51,6 +52,7 @@ const Home = () => {
         </div>
         <FormDomYup />
       </main>
+      <Footer />
     </div>
   );
 };

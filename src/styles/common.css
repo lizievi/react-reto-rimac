@@ -3,13 +3,13 @@
   --font-secondary: "Roboto", serif;
 }
 
-html {
-  font-size: 16px;
-}
-
 * {
   font-family: var(--font-primary);
   box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
 }
 
 body {

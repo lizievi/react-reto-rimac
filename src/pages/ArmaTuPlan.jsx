@@ -31,7 +31,10 @@ const ArmaTuPlan = () => {
     MountDecrease,
     userName,
     userEmail,
-    placa
+    placa,
+    userModelo, 
+    userAnio,
+    userMarca,
   } = usePlanLogic();
 
   const handleConfirmPlan = () => {
@@ -40,6 +43,10 @@ const ArmaTuPlan = () => {
         montoMensual: totalCoverageMount,
         montoAsegurado: mount,
         email: userEmail,
+        nombre: userName,
+        marca: userMarca,
+        anio: userAnio,
+        modelo: userModelo
       },
     });
   };

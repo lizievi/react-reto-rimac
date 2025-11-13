@@ -8,10 +8,10 @@ import Header from "../componentes/Header";
 const Thanks = () => {
   const location = useLocation();
 
-  const { montoMensual, montoAsegurado, email } = location.state;
+  const { montoMensual, montoAsegurado, email, nombre, marca, anio, modelo } = location.state;
 
   console.log(
-    `El monto mensual es: ${montoMensual}, El monto asegurado es: ${montoAsegurado} y el correo es: ${email}`
+    `${nombre} Su monto mensual es: ${montoMensual}, El monto asegurado es: ${montoAsegurado} y el correo es: ${email}, la marca es ${marca}, el año es ${anio} y el modelo es ${modelo}`
   );
 
   // if (!email) {
